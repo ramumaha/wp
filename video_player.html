@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #bordering {
+        border: 25px solid transparent;
+        padding: 30px;
+        border-image: url(border.jpg) 60 round;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-
+awesome.min.css"
+    />
+  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body ng-app="myApp" ng-controller="vidctrl">
+    <div id="bordering" align="center">
+      <button ng-click="playVid()"><i class="fa fa-play"> </i></button>
+      <button ng-click="pauseVid()"><i class="fa fa-pause"></i></button>
+      <button ng-click="makeBig()"><i class="fa fa-expand"></i></button>
+      <button ng-click="makeSmall()"><i class="fa fa-compress"></i></button>
+      <button ng-click="makeNormal()">Original Size</button>
+      <button ng-click="skip(10)"><i class="fa fa-step-forward"></i></button>
+      <button ng-click="restart()"><i class="fa fa-reply"></i></button>
+      <button ng-click="mute()"><i class="fa fa-volume-off"></i></button>
+      <button ng-click="unmute()"><i class="fa fa-volume-up"></i></button>
+      <button ng-click="speed()">2x</button>
+      <button ng-click="speeds()">3x</button>
+      <button ng-click="normal()">1x</button>
+      <br />
+      <video id="video1" width="420" height="300">
+        <source src="sample.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("vidctrl", function ($scope) {
+        var vid = document.getElementById("video1");
+        $scope.playVid = function () {
+          vid.play();
+        };
+        $scope.pauseVid = function () {
+          vid.pause();
+        };
+        $scope.makeBig = function () {
+          vid.width = 560;
+          vid.height = 400;
+        };
+        $scope.makeSmall = function () {
+          vid.width = 320;
+          vid.height = 200;
+        };
+        $scope.makeNormal = function () {
+          vid.width = 420;
+          vid.height = 300;
+        };
+        $scope.skip = function (value) {
+          vid.currentTime += value;
+        };
+        $scope.restart = function () {
+          vid.currentTime = 0;
+        };
+        $scope.mute = function () {
+          vid.muted = true;
+        };
+        $scope.unmute = function () {
+          vid.muted = false;
+        };
+        $scope.speed = function () {
+          vid.playbackRate = 2;
+        };
+        $scope.speeds = function () {
+          vid.playbackRate = 3;
+        };
+        $scope.normal = function () {
+          vid.playbackRate = 1;
+        };
+      });
+    </script>
+  </body>
+</html>
